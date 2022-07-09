@@ -1,1 +1,6 @@
 # dalle-nano
+
+
+
+### Contributors
+Ronnie
