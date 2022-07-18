@@ -1,10 +1,10 @@
-from typing import Union
+from typing import List, Dict, Union
 
 from fastapi import FastAPI, status
 from pydantic import BaseModel
 
 class Prediction(BaseModel):
-    instances: str #list?
+    instances: List[Dict] = []
 
 app = FastAPI()
 
