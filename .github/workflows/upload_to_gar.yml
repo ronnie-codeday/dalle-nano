@@ -1,0 +1,42 @@
+
+
+---
+name: Build and Push Python Image to Google Cloud Platform
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  build-push-gar:
+    name: Build and Push to GCP
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: dalle-nano
+      PROJECT_ID: codeday-355723
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - id: auth
+      name: Authenticate to Google Cloud
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+      
+    - uses: google-github-actions/setup-gcloud@v0
+      #with:
+        #service_account_key: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+        #project_id: ${{ env.PROJECT_ID }}
+        #export_default_credentials: true
+
+    - name: Build Docker Image
+      run: docker build -t $IMAGE_NAME:latest .
+
+    - name: Configure Docker Client
+      run: |-
+        gcloud auth configure-docker us-west2-docker.pkg.dev --quiet
+    - name: Push Docker Image to Artifact Registry
+
+      run: |-
+        docker tag $IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
+        docker push us-west2-docker.pkg.dev/$PROJECT_ID/images/$IMAGE_NAME:latest
