@@ -8,10 +8,10 @@ class Prediction(BaseModel):
 
 app = FastAPI()
 
-@app.post("/prediction/")
+@app.post("/prediction")
 async def getPred(pred: Prediction):
     return {"predictions": pred.instances}
 
-@app.get("/health/", status_code=200)
+@app.get("/health", status_code=200)
 async def health_check():
     return {"Everything": "OK!"}
