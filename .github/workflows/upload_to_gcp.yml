@@ -48,4 +48,4 @@ jobs:
         pip install google-auth
         pip install google-cloud-aiplatform
         pip install google-cloud-artifact-registry
-        python auto/deploy_model.py.py
+        python auto/deploy_model.py
