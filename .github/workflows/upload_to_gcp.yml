@@ -40,3 +40,12 @@ jobs:
       run: |-
         docker tag $IMAGE_NAME:latest us-west2-docker.pkg.dev/$PROJECT_ID/nano/$IMAGE_NAME:latest
         docker push us-west2-docker.pkg.dev/$PROJECT_ID/nano/$IMAGE_NAME:latest
+        
+    - name: Upload and Deploy Model
+      env: 
+        GOOGLE_SERVICE_ACCOUNT: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+      run: |-
+        pip install google-auth
+        pip install google-cloud-aiplatform
+        pip install google-cloud-artifact-registry
+        python auto/deploy_model.py.py
