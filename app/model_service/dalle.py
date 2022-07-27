@@ -152,7 +152,7 @@ def generate_predictions(prompt, local_run=False):
 
 
 def local_run():
-    prompt = 'home simpson obama'
+    prompt = 'homer simpson obama'
     generate_predictions(prompt=prompt, local_run=True)
 
 
