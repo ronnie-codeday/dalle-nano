@@ -133,9 +133,11 @@ def generate_predictions(prompt, local_run=False):
         )
         # remove BOS
         encoded_images = encoded_images.sequences[..., 1:]
+        # encoded images type <class 'jaxlib.xla_extension.DeviceArray'>
         print(f"encoded images type {type(encoded_images)}")
         # decode images
         decoded_images = p_decode(encoded_images, vqgan_params)
+        # decoded images type <class 'jaxlib.xla_extension.pmap_lib.ShardedDeviceArray'
         print(f"decoded images type {type(decoded_images)}")
         decoded_images = decoded_images.clip(0.0, 1.0).reshape((-1, 256, 256, 3))
         c = 0
@@ -151,10 +153,8 @@ def generate_predictions(prompt, local_run=False):
     return {"images": images}
 
 
-def local_run():
-    prompt = 'homer simpson obama'
-    generate_predictions(prompt=prompt, local_run=True)
-
 
 if __name__ == "__main__":
-    local_run()
+    # run locally 
+    prompt = 'homer simpson obama'
+    generate_predictions(prompt=prompt, local_run=True)
