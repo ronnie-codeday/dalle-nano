@@ -109,7 +109,8 @@ def generate_predictions(prompt, local_run=False):
     tokenized_prompts = processor([prompt])
 
     tokenized_prompt = replicate(tokenized_prompts)
-    n_predictions = 8
+#   n_predictions = 8
+    n_predictions = 1
 
     # We can customize generation parameters (see https://huggingface.co/blog/how-to-generate)
     gen_top_k = None
