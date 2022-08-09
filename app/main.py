@@ -26,9 +26,12 @@ async def read_root(request: Request):
 @app.post("/prediction")
 async def getPred(pred: Prediction):
 
-    #from .model_service.dalle import generate_predictions
+    from .model_service.dalle import generate_predictions
     # here you can massage `generate_predictions`
     # output to make compatible with response
+    
+    generate_predictions("old mcdonald")
+
 
     return {"predictions": pred.instances}
 
