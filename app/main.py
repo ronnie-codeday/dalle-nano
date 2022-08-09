@@ -6,6 +6,8 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
+import wandb
+
 from transformers import pipeline, set_seed
 
 
@@ -25,6 +27,8 @@ async def read_root(request: Request):
 
 @app.post("/prediction")
 async def getPred(pred: Prediction):
+    
+    wandb.login(key=["6e369bcd31dc98622147861b34648044a1e3bf8f"])
 
     from .model_service.dalle import generate_predictions
     # here you can massage `generate_predictions`
