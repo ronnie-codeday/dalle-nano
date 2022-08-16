@@ -2,50 +2,25 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="/static/css/home.css" />
-		<script type="text/javascript" defer>
-			function submitForm() {
-				const btn = document.querySelector("#submit-prompt");
-				btn.classList.add("submit-loading");
-				var formElement = document.getElementById('myForm');
-				var data = new FormData(formElement);
-				fetch('/submit', {
-					method: 'POST',
-					body: data,
-				})
-					.then(data => {	
-						let img = document.createElement("img");
-						img.src = "/static/images/generated.png";
-						console.log(img);
-						document.getElementById("responseArea").appendChild(img);
-						btn.classList.remove("submit-loading");
-					})
-					.catch(error => {
-						console.error(error);
-					});
-			}	
-			function toggleLoader() {
-				console.log("madeit");
-				const btn = document.querySelector("#submit-prompt");
-				btn.classList.remove("submit-loading");
-			}
-		</script>
+		<script src="/static/js/home.js" defer></script>
 	</head>
 	<body>
 		<header>
                 	<h1>Dalle-Nano</h1>
-			<p>AI generated text from a prompt</p>
+			<p>AI generated art from a prompt</p>
 		</header>
 		<main>
                 	<form method="post" id="myForm">
 				<fieldset class="get-prompt">
                         		<label for="taskname">Prompt:</label>
-					<input type="text" name="prompt" id="prompt" onkeydown="if(event.keyCode == 13) { submitForm(); return false; }" />
+					<textarea name="prompt" id="prompt" onkeydown="if(event.keyCode == 13) { submitForm(); return false; }"  wrap="soft" oninput="dynamic_grow(this)" ></textarea>
 				</fieldset>
 				<button type="button" value="Submit" id="submit-prompt" onclick="submitForm()">
 					<span class="submit-text">Submit</span>
 				</button>
                 	</form>
                 	<div id="responseArea">
+				<img src="" id="image"/>
 			</div> 
 		</main>
 	</body>

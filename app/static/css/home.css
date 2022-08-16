@@ -25,10 +25,13 @@ form {
 	border-bottom: 3px solid #3b3b4f;
 }
 
-#Prompt {
+#prompt {
 	width: 100%;
-	min-height: 2em;
+	height: 1.5em;
 	margin: 10px 0;
+	resize: none;
+	overflow: hidden;
+	font-family: Tahoma;
 }
 
 #submit-prompt {
@@ -80,17 +83,20 @@ form {
 }
 
 #responseArea {
+	position: relative;
 	width: 33%;
 	height: 60vh;
 	background-color: #3b3b4f;
 	margin: 0 auto;
 	padding: 7px 7px;
 	border: 2px solid white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-#response {
-	position: relative;
-	line-height: 1.5;
-	margin: 0;
-	font-size: 16px;
+#image {
+	position: absolute;
+	max-height: 90%;
+	max-width: 90%;
 }
